@@ -1,4 +1,4 @@
-import { mkdtemp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, readdir, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
@@ -11,7 +11,8 @@ import { ChatStore } from "../server/store";
 
 let base: string;
 beforeEach(async () => {
-  base = await mkdtemp(join(tmpdir(), "new-chat-"));
+  // Real path: chat roots are stored resolved, and macOS's tmpdir is a symlink into /private.
+  base = await realpath(await mkdtemp(join(tmpdir(), "projectless-chat-")));
 });
 afterEach(async () => {
   await rm(base, { recursive: true, force: true });
