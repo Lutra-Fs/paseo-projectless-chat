@@ -23,7 +23,7 @@ export async function ensureChatsProject(
   const projectId = placeholder.projectId;
   if (!projectId) throw new Error("The daemon did not report a project for the chat folder.");
   await placeholder.archive().catch((error: unknown) => {
-    console.warn(`[new-chat] could not archive the placeholder workspace: ${String(error)}`);
+    console.warn(`[projectless-chat] could not archive the placeholder workspace: ${String(error)}`);
   });
   void renameProjectBestEffort(projectId, CHATS_PROJECT_NAME);
   return projectId;

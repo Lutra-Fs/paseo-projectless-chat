@@ -5,7 +5,7 @@ import type { PreparedChat } from "../shared/rpc";
 import type { chatSettings } from "../shared/settings";
 import { ensureChatsProject } from "./chats-project";
 import { claimChatFolder, healChatFolder, removeIfUntouched } from "./folders";
-import { defaultScratchRoot } from "./paths";
+import { defaultChatRoot } from "./paths";
 import { prepareRoot, rootProblem } from "./root";
 import type { ChatRecord, ChatStore } from "./store";
 
@@ -18,8 +18,8 @@ function toPrepared(record: ChatRecord): PreparedChat {
 
 async function configuredRoot(settings: Settings): Promise<string> {
   const state = await settings.read();
-  const custom = state.status === "ready" ? state.values.scratchRoot : "";
-  return custom || defaultScratchRoot();
+  const custom = state.status === "ready" ? state.values.chatRoot : "";
+  return custom || defaultChatRoot();
 }
 
 export function createChatService(deps: { store: ChatStore; settings: Settings; now?: () => Date }) {
@@ -95,7 +95,7 @@ export function createChatService(deps: { store: ChatStore; settings: Settings; 
       const effectiveRoot = await configuredRoot(settings);
       const state = await store.read();
       return {
-        defaultRoot: defaultScratchRoot(),
+        defaultRoot: defaultChatRoot(),
         effectiveRoot,
         rootError: await rootProblem(effectiveRoot),
         chatCount: Object.keys(state.chats).length,

@@ -1,0 +1,40 @@
+{
+  "plugin": {
+    "name": "无项目聊天"
+  },
+  "newChat": {
+    "title": "新聊天",
+    "placeholder": "消息",
+    "inputLabel": "首条消息",
+    "chooseModel": "选择模型",
+    "loadingModels": "正在加载模型…",
+    "noModel": "没有可用的模型",
+    "modelsError": "无法加载模型：{{error}}",
+    "discard": "丢弃",
+    "send": "发送",
+    "hint": "发送时会为这次聊天建一个文件夹。",
+    "modelPicker": "模型",
+    "updatePaseo": "当前版本的 Paseo 不支持从插件打开聊天，请更新 Paseo。",
+    "sendFailed": "无法开始聊天：{{error}}",
+    "retry": "重试"
+  },
+  "settings": {
+    "loading": "正在加载设置…",
+    "newChats": "新聊天",
+    "defaultModel": "默认模型",
+    "automatic": "自动（第一个可用的 provider）",
+    "advanced": "高级",
+    "chatFolder": "聊天文件夹",
+    "chatFolderHint": "daemon 所在机器上的绝对路径。留空则使用 {{defaultRoot}}。只影响之后的新聊天，已有聊天留在原文件夹。",
+    "applyChatFolder": "应用聊天文件夹",
+    "save": "保存",
+    "createdIn": "新聊天会建在",
+    "chatCount": "已创建的聊天",
+    "rootNotAbsolute": "聊天文件夹必须是 daemon 所在机器上的绝对路径。",
+    "rootInsideGit": "聊天文件夹位于 Git 仓库 {{repo}} 内，聊天会继承它的 Git 状态。",
+    "tryAgain": "重试",
+    "reload": "重新加载",
+    "restoreDefaults": "恢复默认设置",
+    "reset": "重置"
+  }
+}

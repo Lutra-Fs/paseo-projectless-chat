@@ -4,7 +4,7 @@ import { newNonce } from "./nonce";
 
 export const NEW_CHAT_SCREEN = "new";
 
-/** Sidebar items cannot navigate to agents; they open the New Chat page, which can. */
+/** Sidebar items cannot navigate to agents; they open the New chat page, which can. */
 export function NewChatSidebarItem({ currentScreen, openScreen }: PluginSidebarItemProps) {
   return (
     <SidebarRow

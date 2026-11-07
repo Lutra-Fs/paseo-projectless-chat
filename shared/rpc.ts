@@ -1,7 +1,7 @@
 import { defineRpc } from "@getpaseo/plugin";
 import { z } from "zod";
 
-/** A one-time key per New Chat page: retries and remounts of the same page reuse one chat. */
+/** A one-time key per New chat page: retries and remounts of the same page reuse one chat. */
 export const NonceSchema = z.string().regex(/^[A-Za-z0-9_-]{8,64}$/);
 
 export const ChatStatusSchema = z.enum(["preparing", "active"]);
@@ -39,6 +39,12 @@ export const abandonChatRpc = defineRpc({
   output: z.object({ removed: z.boolean() }),
 });
 
+export const RootProblemSchema = z.discriminatedUnion("code", [
+  z.object({ code: z.literal("not_absolute") }),
+  z.object({ code: z.literal("inside_git"), repo: z.string() }),
+]);
+export type RootProblem = z.infer<typeof RootProblemSchema>;
+
 /** Facts the settings page shows: where new chats go, and why a custom root was refused. */
 export const chatRootInfoRpc = defineRpc({
   name: "chat.root-info",
@@ -46,7 +52,8 @@ export const chatRootInfoRpc = defineRpc({
   output: z.object({
     defaultRoot: z.string(),
     effectiveRoot: z.string(),
-    rootError: z.string().nullable(),
+    /** Structured so the client words it in the app's language. */
+    rootError: RootProblemSchema.nullable(),
     chatCount: z.number().int().nonnegative(),
   }),
 });

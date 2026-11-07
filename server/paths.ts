@@ -11,4 +11,5 @@ export function paseoHome(env: NodeJS.ProcessEnv = process.env): string {
 export const pluginDataDir = (env?: NodeJS.ProcessEnv) =>
   join(paseoHome(env), "plugin-data", "paseo-projectless-chat");
 
-export const defaultScratchRoot = (env?: NodeJS.ProcessEnv) => join(paseoHome(env), "scratch");
+/** Named like the Chats project, so a project the CLI could not rename still reads "chats". */
+export const defaultChatRoot = (env?: NodeJS.ProcessEnv) => join(paseoHome(env), "chats");

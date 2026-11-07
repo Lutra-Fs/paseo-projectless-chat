@@ -7,7 +7,11 @@ type PaseoApi = ReturnType<typeof usePaseo>;
 export interface ModelOption {
   /** `provider/model`, the form `config.provider` takes. */
   value: string;
+  /** "Provider · Model", for lists that mix providers. */
   label: string;
+  provider: string;
+  providerLabel: string;
+  modelLabel: string;
   isDefault: boolean;
 }
 
@@ -28,6 +32,9 @@ export function modelOptions(snapshot: Snapshot): ModelOption[] {
       options.push({
         value: `${entry.provider}/${model.id}`,
         label: `${providerLabel} · ${model.label}`,
+        provider: entry.provider,
+        providerLabel,
+        modelLabel: model.label,
         isDefault: model.isDefault === true,
       });
     }
@@ -43,7 +50,7 @@ export function pickModel(options: readonly ModelOption[], preferred: string): s
 
 export function useModelOptions(paseo: PaseoApi) {
   return useQuery({
-    queryKey: ["new-chat", "models"],
+    queryKey: ["projectless-chat", "models"],
     queryFn: async () => modelOptions(await paseo.providers.waitForReady({ timeoutMs: 30_000 })),
     staleTime: 60_000,
   });

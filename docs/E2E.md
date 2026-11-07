@@ -44,22 +44,23 @@ Steps:
    paseo daemon restart --home "$E2E_HOME"
    node scripts/e2e.mjs --url ws://127.0.0.1:6799/ws --after-restart --allow-permissions
    ```
-8. Clean up: `paseo daemon stop --home "$E2E_HOME"`. Keep `~/.paseo-e2e` until the results are reviewed; it holds `daemon.log` and the chat folders under `scratch/`.
+8. Clean up: `paseo daemon stop --home "$E2E_HOME"`. Keep `~/.paseo-e2e` until the results are reviewed; it holds `daemon.log` and the chat folders under `chats/`.
 
-Expected: every line PASS. `WARN project is named Chats` means the daemon could not find the `paseo` CLI (the project then keeps the name `scratch`); report it, it is not a failure.
+Expected: every line PASS. `WARN project is named Chats` means the daemon could not find the `paseo` CLI (the project then keeps the name `chats`); report it, it is not a failure.
 
 ## Part 2: UI (a person, about 10 minutes)
 
 On your normal Paseo with the plugin installed (`paseo plugin install git:Lutra-Fs/paseo-projectless-chat`). Desktop first, then web or phone if you use them.
 
-1. Sidebar shows **New chat**. Pressing it opens a page with a message box and a model chip. **⌘K → "New chat"** opens the same page.
-2. Model chip lists your models; the choice sticks for that page. Settings → Plugins → New chat → Default model changes the initial choice.
+1. Settings → Plugins lists the plugin as **Projectless Chat** (Chinese UI: 无项目聊天). Sidebar shows **New chat** (新聊天). Pressing it opens a page with a message box and a model chip. **⌘K → "New chat"** opens the same page.
+2. Model chip lists your models; the choice sticks for that page. Settings → Plugins → Projectless chat → Default model changes the initial choice.
 3. Typing Chinese with an IME: pressing Enter to confirm a candidate must **not** send. Enter sends, Shift+Enter makes a new line (desktop/web). On phones, the send button sends.
 4. Type a message, leave the page, come back via browser back: the draft is still there. **Discard** empties it.
-5. Send. You land on Paseo's normal chat page and the reply streams. The sidebar has the chat under **Chats** (or `scratch`), titled from your message.
-6. Ask it to create a file. The permission prompt appears in the normal approval UI; approve it. The file appears in `~/.paseo/scratch/<date>/<folder>/`.
+5. Send. You land on Paseo's normal chat page and the reply streams. The sidebar has the chat under **Chats** (or `chats`), titled from your message.
+6. Ask it to create a file. The permission prompt appears in the normal approval UI; approve it. The file appears in `~/.paseo/chats/<date>/<folder>/`.
 7. Rename the chat: its folder name stays the same.
 8. Send a second message from Paseo's own composer: slash commands and @ files work here.
 9. Archive the chat: its folder and files remain on disk.
 10. Note what the chat page still shows of a "project": the project header, the folder path, Git/Changes panels, branch pickers. Screenshots help decide whether a core Paseo change is worth proposing.
-11. Settings → Plugins → New chat → Chat folder: enter a path inside a Git repository → it is refused. Enter another plain folder → the next new chat goes there; earlier chats stay where they were, still under the same Chats group.
+11. Switch the app language to Chinese and back: the New chat page and settings follow without losing the draft.
+12. Settings → Plugins → Projectless chat → Chat folder: enter a path inside a Git repository → it is refused. Enter another plain folder → the next new chat goes there; earlier chats stay where they were, still under the same Chats group.

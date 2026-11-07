@@ -1,0 +1,40 @@
+{
+  "plugin": {
+    "name": "Projectless chat"
+  },
+  "newChat": {
+    "title": "New chat",
+    "placeholder": "Message",
+    "inputLabel": "First message",
+    "chooseModel": "Choose model",
+    "loadingModels": "Loading models…",
+    "noModel": "No model available",
+    "modelsError": "Could not load models: {{error}}",
+    "discard": "Discard",
+    "send": "Send",
+    "hint": "A folder for this chat is created when you send.",
+    "modelPicker": "Model",
+    "updatePaseo": "This Paseo version cannot open chats from plugins. Update Paseo.",
+    "sendFailed": "Could not start the chat: {{error}}",
+    "retry": "Retry"
+  },
+  "settings": {
+    "loading": "Loading settings…",
+    "newChats": "New chats",
+    "defaultModel": "Default model",
+    "automatic": "Automatic (first ready provider)",
+    "advanced": "Advanced",
+    "chatFolder": "Chat folder",
+    "chatFolderHint": "An absolute path on the daemon host. Empty uses {{defaultRoot}}. Only new chats use it; existing chats keep their folders.",
+    "applyChatFolder": "Apply chat folder",
+    "save": "Save",
+    "createdIn": "New chats are created in",
+    "chatCount": "Chats created",
+    "rootNotAbsolute": "The chat folder must be an absolute path on the daemon host.",
+    "rootInsideGit": "The chat folder is inside the Git repository {{repo}}; chats would inherit its Git status.",
+    "tryAgain": "Try again",
+    "reload": "Reload",
+    "restoreDefaults": "Restore default settings",
+    "reset": "Reset"
+  }
+}

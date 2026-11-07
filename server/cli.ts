@@ -40,7 +40,7 @@ export async function renameProjectBestEffort(projectId: string, name: string): 
       ["project", "rename", projectId, name, "--json"],
       { timeout: TIMEOUT_MS, env: process.env, shell: process.platform === "win32" },
       (error) => {
-        if (error) console.warn(`[new-chat] project rename via CLI failed: ${error.message}`);
+        if (error) console.warn(`[projectless-chat] project rename via CLI failed: ${error.message}`);
         resolveRename(!error);
       },
     );

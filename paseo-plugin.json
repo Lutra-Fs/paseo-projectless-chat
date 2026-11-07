@@ -1,7 +1,13 @@
 {
   "id": "paseo-projectless-chat",
-  "name": "New Chat",
-  "description": "Start a chat without picking a project or folder.",
+  "name": "Projectless Chat",
+  "description": "Start a chat without picking a project or folder: New chat in the sidebar, and every chat lands in one Chats group.",
+  "translations": {
+    "zh-CN": {
+      "name": "无项目聊天",
+      "description": "不用选项目或目录就能开始聊天：侧边栏点「新聊天」，所有聊天都归在同一个 Chats 分组里。"
+    }
+  },
   "media": [],
   "requirements": {
     "paseo": ">=0.15.3"

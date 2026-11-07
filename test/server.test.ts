@@ -65,9 +65,9 @@ describe("folders", () => {
 
 describe("rootProblem", () => {
   it("refuses relative paths and folders inside a git repository", async () => {
-    expect(await rootProblem("relative/path")).toMatch(/absolute/);
+    expect(await rootProblem("relative/path")).toEqual({ code: "not_absolute" });
     await mkdir(join(base, "repo", ".git"), { recursive: true });
-    expect(await rootProblem(join(base, "repo", "chats", "not-yet-created"))).toMatch(/Git repository/);
+    expect(await rootProblem(join(base, "repo", "chats", "not-yet-created"))).toMatchObject({ code: "inside_git" });
     expect(await rootProblem(join(base, "plain"))).toBeNull();
   });
 });
@@ -89,16 +89,16 @@ function fakePaseo() {
   return { paseo, calls, projects };
 }
 
-function settingsWith(scratchRoot: string) {
+function settingsWith(chatRoot: string) {
   return {
-    read: async () => ({ status: "ready" as const, revision: "1", values: { scratchRoot, defaultModel: "" } }),
+    read: async () => ({ status: "ready" as const, revision: "1", values: { chatRoot, defaultModel: "" } }),
     subscribe: () => () => {},
   };
 }
 
 describe("chat service", () => {
   it("prepares once per nonce, creating the Chats project once", async () => {
-    const root = join(base, "scratch");
+    const root = join(base, "chats");
     const { paseo, calls } = fakePaseo();
     const chats = createChatService({ store: new ChatStore(join(base, "data")), settings: settingsWith(root) });
 
@@ -158,5 +158,6 @@ describe("chat service", () => {
       settings: settingsWith(join(base, "repo", "chats")),
     });
     await expect(chats.prepare(paseo, { nonce: "nonce-000e", text: "x" })).rejects.toThrow(/Git repository/);
+    expect((await chats.rootInfo()).rootError).toMatchObject({ code: "inside_git", repo: expect.stringMatching(/repo$/) });
   });
 });

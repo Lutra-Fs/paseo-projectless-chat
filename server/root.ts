@@ -1,14 +1,19 @@
 import { mkdir, realpath, stat } from "node:fs/promises";
 import { dirname, isAbsolute, join, resolve } from "node:path";
+import type { RootProblem } from "../shared/rpc";
 
 /** Why a chat root cannot be used, or null. */
-export async function rootProblem(root: string): Promise<string | null> {
-  if (!isAbsolute(root)) return "The chat folder must be an absolute path on the daemon host.";
+export async function rootProblem(root: string): Promise<RootProblem | null> {
+  if (!isAbsolute(root)) return { code: "not_absolute" };
   const repo = await enclosingGitRoot(root);
-  if (repo) {
-    return `The chat folder is inside the Git repository ${repo}; chats would inherit its Git status.`;
-  }
-  return null;
+  return repo ? { code: "inside_git", repo } : null;
+}
+
+/** English wording for errors that reach a toast or log as raw daemon text. */
+export function describeRootProblem(problem: RootProblem): string {
+  return problem.code === "not_absolute"
+    ? "The chat folder must be an absolute path on the daemon host."
+    : `The chat folder is inside the Git repository ${problem.repo}; chats would inherit its Git status.`;
 }
 
 /**
@@ -17,7 +22,7 @@ export async function rootProblem(root: string): Promise<string | null> {
  */
 export async function prepareRoot(root: string): Promise<string> {
   const problem = await rootProblem(root);
-  if (problem) throw new Error(problem);
+  if (problem) throw new Error(describeRootProblem(problem));
   await mkdir(root, { recursive: true });
   return realpath(root);
 }
