@@ -32,7 +32,7 @@ export async function claimChatFolder(input: {
       throw error;
     }
     const chatId = basename(dir);
-    const marker = { plugin: "paseo-new-chat", chatId, nonce: input.nonce, createdAt: input.now.toISOString() };
+    const marker = { plugin: "paseo-projectless-chat", chatId, nonce: input.nonce, createdAt: input.now.toISOString() };
     await writeFile(join(dir, MARKER), `${JSON.stringify(marker, null, 2)}\n`, "utf8");
     return { dir, chatId };
   }

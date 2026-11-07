@@ -1,9 +1,10 @@
 {
-  "name": "paseo-new-chat",
+  "name": "paseo-projectless-chat",
   "private": true,
   "version": "0.0.0",
   "files": [
     "paseo-plugin.json",
+    "README.md",
     "OVERVIEW.md",
     "index.client.ts",
     "index.client.tsx",

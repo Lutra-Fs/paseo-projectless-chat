@@ -9,6 +9,6 @@ export function paseoHome(env: NodeJS.ProcessEnv = process.env): string {
 }
 
 export const pluginDataDir = (env?: NodeJS.ProcessEnv) =>
-  join(paseoHome(env), "plugin-data", "paseo-new-chat");
+  join(paseoHome(env), "plugin-data", "paseo-projectless-chat");
 
 export const defaultScratchRoot = (env?: NodeJS.ProcessEnv) => join(paseoHome(env), "scratch");
