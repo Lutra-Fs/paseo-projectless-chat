@@ -1,0 +1,9 @@
+{
+  "id": "paseo-new-chat",
+  "name": "New Chat",
+  "description": "Start a chat without picking a project or folder.",
+  "media": [],
+  "requirements": {
+    "paseo": ">=0.15.3"
+  }
+}
