@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import type { PaseoApi } from "@getpaseo/client";
+import type { PaseoApi } from "./paseo-api";
 import type { PluginSettings } from "@getpaseo/plugin/server";
 import type { PreparedChat } from "../shared/rpc";
 import type { chatSettings } from "../shared/settings";

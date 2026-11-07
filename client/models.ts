@@ -1,5 +1,8 @@
-import type { PaseoApi } from "@getpaseo/client";
+import type { usePaseo } from "@getpaseo/plugin/client";
 import { useQuery } from "@tanstack/react-query";
+
+/** Derived from the host SDK; `@getpaseo/client` does not resolve in a Git install. */
+type PaseoApi = ReturnType<typeof usePaseo>;
 
 export interface ModelOption {
   /** `provider/model`, the form `config.provider` takes. */

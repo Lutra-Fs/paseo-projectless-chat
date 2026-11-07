@@ -1,4 +1,4 @@
-import type { PaseoApi } from "@getpaseo/client";
+import type { PaseoApi } from "./paseo-api";
 import { renameProjectBestEffort } from "./cli";
 
 export const CHATS_PROJECT_NAME = "Chats";

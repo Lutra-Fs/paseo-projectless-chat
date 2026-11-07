@@ -2,7 +2,7 @@ import { mkdtemp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promis
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import type { PaseoApi } from "@getpaseo/client";
+import type { PaseoApi } from "../server/paseo-api";
 import { createChatService } from "../server/chats";
 import { claimChatFolder, healChatFolder, isManagedChatFolder, MARKER, removeIfUntouched } from "../server/folders";
 import { paseoHome } from "../server/paths";
